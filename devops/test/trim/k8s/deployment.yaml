@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-trim
+  namespace: mdp
+  labels:
+    mSvc: webapp-trim
+spec:
+  selector:
+    matchLabels:
+      mSvc: webapp-trim
+  template:
+    metadata:
+      labels:
+        mSvc: webapp-trim
+    spec:
+      containers:
+        - name: webapp-trim-container
+          image: monsterdigital.azurecr.io/mdp-webapp-trim:test
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 5

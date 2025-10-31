@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-dtf-hat
+  namespace: mdp
+  labels:
+    mSvc: webapp-dtf-hat
+spec:
+  selector:
+    matchLabels:
+      mSvc: webapp-dtf-hat
+  template:
+    metadata:
+      labels:
+        mSvc: webapp-dtf-hat
+    spec:
+      containers:
+        - name: webapp-dtf-hat-container
+          image: monsterdigital.azurecr.io/mdp-webapp-dtf-hat:test
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 5

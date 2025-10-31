@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-dtf-hat
+  namespace: mdp
+  labels:
+    mSvc: webapp-dtf-hat
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    mSvc: webapp-dtf-hat

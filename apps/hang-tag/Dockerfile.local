@@ -1,0 +1,20 @@
+FROM node:20-alpine
+WORKDIR /app
+# Copy dependency manifests first for better layer caching
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+
+# Enable pnpm and install deps with cache for faster rebuilds
+# Cache mount explanation:
+# - /root/.local/share/pnpm/store is INSIDE the container (where pnpm writes packages during build)
+# - Docker BuildKit persists this directory OUTSIDE the container in its cache (in Docker VM's storage)
+# - On subsequent builds, Docker reuses the cached packages instead of re-downloading everything
+# - This makes rebuilds fast since packages are only installed when package.json/pnpm-lock.yaml changes
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+  corepack enable \
+  && corepack prepare pnpm@latest --activate \
+  && pnpm --version \
+  && pnpm config set store-dir /root/.local/share/pnpm/store \
+  && pnpm install --frozen-lockfile
+
+# Copy Angular config files needed for ng serve (copy after install to preserve cache)
+COPY angular.json tsconfig.json tsconfig.app.json .postcssrc.json ./

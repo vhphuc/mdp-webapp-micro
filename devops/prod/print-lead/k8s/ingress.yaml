@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-print-lead-ingress
+  namespace: mdp
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  rules:
+    - host: mdpprod-m.monsterdigital.biz
+      http:
+        paths:
+          - path: /print-lead
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-print-lead
+                port:
+                  number: 80

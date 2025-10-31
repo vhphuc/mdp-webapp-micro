@@ -1,0 +1,17 @@
+<nz-breadcrumb class="tw:font-semibold tw:[&_.ant-breadcrumb-separator]:text-white">
+  <nz-breadcrumb-item>
+    <span class="tw:underline tw:cursor-pointer tw:text-white" (click)="resetScanProcess()">DTF ACCESSORIES</span>
+  </nz-breadcrumb-item>
+  @if ($item(); as item) {
+    <nz-breadcrumb-item class="tw:text-white tw:uppercase">
+      <span>{{ item.barcode }}</span>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item class="tw:text-white tw:uppercase">
+      <span>{{ 'CONFIRM_ITEM' | translate | uppercase }}</span>
+    </nz-breadcrumb-item>
+  } @else {
+    <nz-breadcrumb-item class="tw:text-white tw:uppercase">
+      <span>{{ 'SCAN' | translate }} {{ 'TRANSFER' | translate }}</span>
+    </nz-breadcrumb-item>
+  }
+</nz-breadcrumb>

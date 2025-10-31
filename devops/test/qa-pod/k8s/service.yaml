@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-qa-pod
+  namespace: mdp
+  labels:
+    mSvc: webapp-qa-pod
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    mSvc: webapp-qa-pod

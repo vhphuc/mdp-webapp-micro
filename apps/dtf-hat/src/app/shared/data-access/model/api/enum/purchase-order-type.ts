@@ -1,0 +1,31 @@
+export enum PurchaseOrderType {
+  Blanks = 0,
+  Miscellaneous = 1,
+  NeckLabel = 2,
+  Bag = 3,
+  PackageInsert = 4,
+  HangTag = 6,
+  Trim = 7,
+  Insert = 12,
+  BagSticker = 13,
+  GarmentSticker = 14,
+  Transfers = 15,
+  JitRegular = 16,
+  JitReorder = 17,
+}
+
+export const PurchaseOrderTypeDescription = new Map<PurchaseOrderType, string>([
+  [PurchaseOrderType.Blanks, 'Blanks'],
+  [PurchaseOrderType.Miscellaneous, 'Miscellaneous'],
+  [PurchaseOrderType.NeckLabel, 'Neck Label'],
+  [PurchaseOrderType.Bag, 'Bag'],
+  [PurchaseOrderType.PackageInsert, 'Package Insert'],
+  [PurchaseOrderType.HangTag, 'HangTag'],
+  [PurchaseOrderType.Trim, 'Trim'],
+  [PurchaseOrderType.Insert, 'Insert'],
+  [PurchaseOrderType.BagSticker, 'Bag Sticker'],
+  [PurchaseOrderType.GarmentSticker, 'Garment Sticker'],
+  [PurchaseOrderType.Transfers, 'Transfers'],
+  [PurchaseOrderType.JitRegular, 'Regular'],
+  [PurchaseOrderType.JitReorder, 'Reorder'],
+]);

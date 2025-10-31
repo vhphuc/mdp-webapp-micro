@@ -1,0 +1,16 @@
+/* https://tailwindcss.com/docs/preflight 
+ * Disable preflight
+ */
+
+ @layer theme, base, components, utilities;
+
+ @import 'tailwindcss/theme.css' layer(theme) prefix(tw) important;
+ @import 'tailwindcss/utilities.css' layer(utilities) prefix(tw) important;
+
+ @utility bg-primary {
+    background-color: #164a66;
+ }
+
+ @utility bg-primary-light {
+    background-color: #2f6987;
+ }

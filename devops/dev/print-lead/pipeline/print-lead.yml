@@ -1,0 +1,42 @@
+trigger:
+  branches:
+    include:
+      - development
+  paths:
+    include:
+      - apps/print-lead/**
+      - devops/dev/print-lead/k8s/**
+
+pool: 'NOIS-TaiVo'
+
+variables:
+  - group: MDP DEV
+  repository: 'mdp-webapp-print-lead'
+  dockerfile: 'apps/print-lead/Dockerfile'
+  k8sPath: 'devops/dev/print-lead/k8s'
+  k8sSvcEndpoint: 'aks-dev'
+  oldImageTag: 'dev'
+  imageTag: 'dev-$(Build.BuildId)'
+
+steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'md-acr-2023'
+      repository: '$(repository)'
+      command: 'buildAndPush'
+      Dockerfile: '$(dockerfile)'
+      buildContext: 'apps/print-lead'
+      tags: '$(imageTag)'
+
+  - powershell: (Get-Content $(k8sPath)/deployment.yaml) -replace '$(repository):$(oldImageTag)', '$(repository):$(imageTag)' | Set-Content $(k8sPath)/deployment.yaml
+    displayName: 'Change Template'
+
+  - task: Kubernetes@1
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceEndpoint: '$(k8sSvcEndpoint)'
+      namespace: 'mdp'
+      command: 'apply'
+      arguments: '-f $(k8sPath)'
+      secretType: 'dockerRegistry'
+      containerRegistryType: 'Azure Container Registry'

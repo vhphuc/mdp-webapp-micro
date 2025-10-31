@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-neck-label
+  namespace: mdp
+  labels:
+    mSvc: webapp-neck-label
+spec:
+  selector:
+    matchLabels:
+      mSvc: webapp-neck-label
+  template:
+    metadata:
+      labels:
+        mSvc: webapp-neck-label
+    spec:
+      containers:
+        - name: webapp-neck-label-container
+          image: monsterdigital.azurecr.io/mdp-webapp-neck-label:dev
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 5

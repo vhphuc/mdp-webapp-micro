@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-jit-receive
+  namespace: mdp
+  labels:
+    mSvc: webapp-jit-receive
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    mSvc: webapp-jit-receive

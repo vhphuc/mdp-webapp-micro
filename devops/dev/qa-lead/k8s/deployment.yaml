@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-qa-lead
+  namespace: mdp
+  labels:
+    mSvc: webapp-qa-lead
+spec:
+  selector:
+    matchLabels:
+      mSvc: webapp-qa-lead
+  template:
+    metadata:
+      labels:
+        mSvc: webapp-qa-lead
+    spec:
+      containers:
+        - name: webapp-qa-lead-container
+          image: monsterdigital.azurecr.io/mdp-webapp-qa-lead:dev
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 5

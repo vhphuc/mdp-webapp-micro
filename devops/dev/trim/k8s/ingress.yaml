@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-trim-ingress
+  namespace: mdp
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  rules:
+    - host: mdpdev-m.monsterdigital.biz
+      http:
+        paths:
+          - path: /trim
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-trim
+                port:
+                  number: 80

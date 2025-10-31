@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-dtf-hat-ingress
+  namespace: mdp
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  rules:
+    - host: mdptest-m.monsterdigital.biz
+      http:
+        paths:
+          - path: /dtf-hat
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-dtf-hat
+                port:
+                  number: 80

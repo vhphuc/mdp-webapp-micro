@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-washing
+  namespace: mdp
+  labels:
+    mSvc: webapp-washing
+spec:
+  selector:
+    matchLabels:
+      mSvc: webapp-washing
+  template:
+    metadata:
+      labels:
+        mSvc: webapp-washing
+    spec:
+      containers:
+        - name: webapp-washing-container
+          image: monsterdigital.azurecr.io/mdp-webapp-washing:prod
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 5

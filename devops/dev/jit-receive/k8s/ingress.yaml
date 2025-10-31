@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-jit-receive-ingress
+  namespace: mdp
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  rules:
+    - host: mdpdev-m.monsterdigital.biz
+      http:
+        paths:
+          - path: /jit-receive
+            pathType: Prefix
+            backend:
+              service:
+                name: webapp-jit-receive
+                port:
+                  number: 80

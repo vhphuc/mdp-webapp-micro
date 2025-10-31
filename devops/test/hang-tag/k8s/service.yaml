@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-hang-tag
+  namespace: mdp
+  labels:
+    mSvc: webapp-hang-tag
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    mSvc: webapp-hang-tag

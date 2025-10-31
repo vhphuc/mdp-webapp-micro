@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-jit-receive
+  namespace: mdp
+  labels:
+    mSvc: webapp-jit-receive
+spec:
+  selector:
+    matchLabels:
+      mSvc: webapp-jit-receive
+  template:
+    metadata:
+      labels:
+        mSvc: webapp-jit-receive
+    spec:
+      containers:
+        - name: webapp-jit-receive-container
+          image: monsterdigital.azurecr.io/mdp-webapp-jit-receive:dev
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 5
