@@ -46,7 +46,7 @@ export class ImageZoomDirective implements AfterViewInit {
     // wrap image with container
     const parent = this.image.parentNode;
 
-    this.image.className = 'tw:absolute tw:inset-0 tw:w-full tw:h-full tw:object-contain tw:object-left-top';
+    this.image.className = 'tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-contain tw-object-left-top';
 
     this._renderer2.setStyle(this.zoomContainer, 'position', 'relative');
     parent!.append(this.zoomContainer);

@@ -7,7 +7,7 @@ import { openPrintingPopup } from '@shared/ui/component/printing-popup';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Injectable()
-export class DtfHatStore {
+export class DtfHatStoreService {
   $step = signal<DtfHatStep>(DtfHatStep.SCAN_TRANSFER);
   $item = signal<ScanTransfer.Response | null>(null);
 

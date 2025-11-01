@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { GlobalSpinnerComponent } from "@shared/ui/component/global-spinner/global-spinner.component";
 import { IdleComponent } from "@shared/ui/component/idle/idle.component";
@@ -17,6 +17,8 @@ import { map } from "rxjs/operators";
       <app-idle />
     }
   `,
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   protected loaded$ = timer(10000).pipe(map(() => true));

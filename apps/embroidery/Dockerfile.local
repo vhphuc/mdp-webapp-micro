@@ -17,4 +17,4 @@ RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
   && pnpm install --frozen-lockfile
 
 # Copy Angular config files needed for ng serve (copy after install to preserve cache)
-COPY angular.json tsconfig.json tsconfig.app.json .postcssrc.json ./
+COPY angular.json tsconfig.json tsconfig.app.json ./

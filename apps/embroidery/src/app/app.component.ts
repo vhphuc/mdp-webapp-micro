@@ -1,10 +1,10 @@
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { timer } from "rxjs";
-import { map } from "rxjs/operators";
 import { GlobalSpinnerComponent } from "@shared/ui/component/global-spinner/global-spinner.component";
 import { IdleComponent } from "@shared/ui/component/idle/idle.component";
+import { timer } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-root",

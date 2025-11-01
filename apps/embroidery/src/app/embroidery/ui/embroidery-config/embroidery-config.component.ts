@@ -35,7 +35,7 @@ import { AuthStore } from 'src/app/auth/auth.store';
     @if (!isConfiguring()) {
       <nz-space [nzSplit]="spaceSplit">
         <ng-template #spaceSplit>
-          <span nz-icon nzType="minus" nzTheme="outline" class="tw:text-white"></span>
+          <span nz-icon nzType="minus" nzTheme="outline" class="tw-text-white"></span>
         </ng-template>
 
         <!-- Factory -->
@@ -43,8 +43,8 @@ import { AuthStore } from 'src/app/auth/auth.store';
           *nzSpaceItem
           nz-dropdown
           [nzDropdownMenu]="factoryMenu"
-          class="tw:text-white tw:cursor-pointer tw:font-semibold"
-          [class.tw:pointer-events-none]="!isAdmin()">
+          class="tw-text-white tw-cursor-pointer tw-font-semibold"
+          [class.tw-pointer-events-none]="!isAdmin()">
           {{ 'FACTORY' | translate }}: {{ config().factory!.name }}
         </div>
         <nz-dropdown-menu #factoryMenu="nzDropdownMenu">
@@ -52,10 +52,10 @@ import { AuthStore } from 'src/app/auth/auth.store';
             @for (factory of userFactoriesData(); track $index) {
               <li
                 nz-menu-item
-                class="tw:hover:bg-primary tw:hover:text-white tw:cursor-pointer"
+                class="hover:tw-bg-primary hover:tw-text-white tw-cursor-pointer"
                 (click)="onClickFactory(factory)"
-                [ngClass]="config().factory!.id === factory.id ? 'tw:bg-primary tw:text-white' : ''">
-                <span class="tw:inline-block tw:text-sm tw:w-full">{{ factory.name }}</span>
+                [ngClass]="config().factory!.id === factory.id ? 'tw-bg-primary tw-text-white' : ''">
+                <span class="tw-inline-block tw-text-sm tw-w-full">{{ factory.name }}</span>
               </li>
             }
           </ul>
@@ -65,18 +65,18 @@ import { AuthStore } from 'src/app/auth/auth.store';
           *nzSpaceItem
           nz-dropdown
           [nzDropdownMenu]="stationMenu"
-          class="tw:text-white tw:cursor-pointer tw:font-semibold"
-          [class.tw:pointer-events-none]="!isAdmin()">
+          class="tw-text-white tw-cursor-pointer tw-font-semibold"
+          [class.tw-pointer-events-none]="!isAdmin()">
           {{ 'STATION' | translate }}: {{ config().station!.stationName }}
         </div>
         <nz-dropdown-menu #stationMenu="nzDropdownMenu">
-          <ul nz-menu class="tw:max-h-96 tw:overflow-y-auto tw:slim-scrollbar">
+          <ul nz-menu class="tw-max-h-96 tw-overflow-y-auto tw-slim-scrollbar">
             @for (station of stationsData(); track $index) {
               <li
                 nz-menu-item
-                class="tw:hover:bg-primary tw:hover:text-white tw:cursor-pointer"
+                class="hover:tw-bg-primary hover:tw-text-white tw-cursor-pointer"
                 (click)="onClickStation(station)"
-                [ngClass]="config().station!.id === station.id ? 'tw:bg-primary tw:text-white' : ''">
+                [ngClass]="config().station!.id === station.id ? 'tw-bg-primary tw-text-white' : ''">
                 <span>{{ station.stationName }}</span>
               </li>
             }
@@ -93,8 +93,8 @@ import { AuthStore } from 'src/app/auth/auth.store';
       (nzOnOk)="onConfigModalAccept('factory-modal')"
       [nzOkDisabled]="!config().factory">
       <ng-container *nzModalContent>
-        <nz-form-item class="tw:mb-0">
-          <nz-form-label [nzSm]="4" nzRequired class="tw:font-semibold">{{ 'FACTORY' | translate }}</nz-form-label>
+        <nz-form-item class="tw-mb-0">
+          <nz-form-label [nzSm]="4" nzRequired class="tw-font-semibold">{{ 'FACTORY' | translate }}</nz-form-label>
           <nz-form-control [nzSm]="20">
             <nz-select id="factory-select" [ngModel]="config().factory" (ngModelChange)="signalConfigFactoryChange($event)">
               @for (factory of userFactoriesData(); track $index) {
@@ -113,8 +113,8 @@ import { AuthStore } from 'src/app/auth/auth.store';
       (nzOnOk)="onConfigModalAccept('station-modal')"
       [nzOkDisabled]="!config().station">
       <ng-container *nzModalContent>
-        <nz-form-item class="tw:mb-0">
-          <nz-form-label [nzSm]="4" nzRequired class="tw:font-semibold">{{ 'STATION' | translate }}</nz-form-label>
+        <nz-form-item class="tw-mb-0">
+          <nz-form-label [nzSm]="4" nzRequired class="tw-font-semibold">{{ 'STATION' | translate }}</nz-form-label>
           <nz-form-control [nzSm]="20">
             <nz-select id="station-select" [ngModel]="config().station" (ngModelChange)="signalConfigStationChange($event)" nzShowSearch>
               @for (station of stationsData(); track $index) {

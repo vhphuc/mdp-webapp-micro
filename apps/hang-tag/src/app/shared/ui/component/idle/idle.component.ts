@@ -13,9 +13,9 @@ import { provideComponentStore } from '@ngrx/component-store';
   providers: [provideComponentStore(IdleStore)],
   template: `
     <div
-      class="tw:fixed tw:left-1/2 tw:translate-x-[-50%] tw:py-1 tw:px-2 tw:bg-[#001529] tw:z-[100] tw:text-white"
+      class="tw-fixed tw-left-1/2 tw-translate-x-[-50%] tw-py-1 tw-px-2 tw-bg-[#001529] tw-z-[100] tw-text-white"
       [@insertRemoveTrigger]="$isCountdownVisible() ? 'show' : 'hide'">
-      <nz-spin nzSimple nzSize="small" class="tw:inline-block tw:mr-3 tw:text-white"></nz-spin>
+      <nz-spin nzSimple nzSize="small" class="tw-inline-block tw-mr-3 tw-text-white"></nz-spin>
       <span>{{ 'AUTOMATICALLY_SIGN_OUT_IN' | translate }} {{ $countdown() }}</span>
     </div>
   `,

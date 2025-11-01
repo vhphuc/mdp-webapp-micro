@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-import { ImageErrorUrlDirective } from '@shared/ui/directive/image-error-url.directive';
+import { DtfHatOrderDetailsComponent } from '../ui/dtf-hat-order-details/dtf-hat-order-details.component';
 import { KeepFocusDirective } from '@shared/ui/directive/keep-focus.directive';
 import { NzInputDirective } from 'ng-zorro-antd/input';
 import { NzTypographyComponent } from 'ng-zorro-antd/typography';
-import { EDtfHatAppConfirmType } from '../dtf-hat.model';
-import { DtfHatStore } from '../dtf-hat.store';
-import { DtfHatOrderDetailsComponent } from '../ui/dtf-hat-order-details/dtf-hat-order-details.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { DtfHatStoreService } from '../dtf-hat-store.service';
 import { DtfHatPreviewImageComponent } from '../ui/dtf-hat-preview-image/dtf-hat-preview-image.component';
+import { ImageErrorUrlDirective } from '@shared/ui/directive/image-error-url.directive';
+import { EDtfHatAppConfirmType } from '../dtf-hat.model';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-step-confirm-item',
@@ -22,6 +23,7 @@ import { DtfHatPreviewImageComponent } from '../ui/dtf-hat-preview-image/dtf-hat
     TranslateModule,
     DtfHatPreviewImageComponent,
     ImageErrorUrlDirective,
+    UpperCasePipe,
   ],
   templateUrl: './step-confirm-item.component.html',
   styles: ``,
@@ -29,7 +31,7 @@ import { DtfHatPreviewImageComponent } from '../ui/dtf-hat-preview-image/dtf-hat
 })
 export class StepConfirmItemComponent {
   input = new FormControl('', { nonNullable: true });
-  store = inject(DtfHatStore);
+  store = inject(DtfHatStoreService);
   $item = this.store.$item;
   $isShowConfirmRejectPopup = signal(false);
 

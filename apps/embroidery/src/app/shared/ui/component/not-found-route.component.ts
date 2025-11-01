@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-not-found-route',
@@ -9,8 +9,4 @@ import { CommonModule } from '@angular/common';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotFoundRouteComponent implements OnInit {
-  ngOnInit() {
-    window.location.href = '/all-apps';
-  }
-}
+export class NotFoundRouteComponent {}

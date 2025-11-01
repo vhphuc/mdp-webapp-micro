@@ -1,10 +1,10 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Role } from '@shared/data-access/model/api/enum/role';
-import { AuthStore } from 'src/app/auth/auth.store';
 import { LocalStorageStore } from '@shared/data-access/store/local-storage.store';
 import { UserFactoriesGetApi } from '@shared/data-access/model/api/user-factories-get-api';
 import { StationsGetApi } from '@shared/data-access/model/api/station-api';
 import { PrintersGetApi } from '@shared/data-access/model/api/printer-configuration-api';
+import { DtfHatConfigStoreService } from './dtf-hat-config-store.service';
 import { StationType } from '@shared/data-access/model/api/enum/station-type';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -15,7 +15,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule } from '@angular/forms';
-import { DtfHatConfigStoreService } from './dtf-hat-config-store.service';
+import { AuthStore } from 'src/app/auth/auth.store';
 
 @Component({
   selector: 'app-dtf-hat-config',

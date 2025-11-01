@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [CommonModule, NzButtonModule, NzDropDownModule, NzIconModule, NzMenuModule, TranslateModule, RouterLink],
   template: `
-    <a nz-button nzType="text" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="tw:text-white tw:font-semibold">
+    <a nz-button nzType="text" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="tw-text-white tw-font-semibold">
       {{ $user()?.fullName }}
       <span nz-icon nzType="caret-down"></span>
     </a>

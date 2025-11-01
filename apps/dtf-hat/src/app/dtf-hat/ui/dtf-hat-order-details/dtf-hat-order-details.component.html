@@ -1,54 +1,54 @@
 @if ($item(); as item) {
-  <div class="tw:mb-3 tw:text-xl">
+  <div class="tw-mb-3 tw-text-xl">
      <!-- Priority and Jit -->
      @if (item.isPriority) {
-      <div class="tw:bg-yellow-300 tw:text-center">
-        <span class="tw:text-2xl tw:font-bold">{{ 'NECK_LABEL.PRIORITY' | translate | uppercase }}</span>
+      <div class="tw-bg-yellow-300 tw-text-center">
+        <span class="tw-text-2xl tw-font-bold">{{ 'NECK_LABEL.PRIORITY' | translate | uppercase }}</span>
       </div>
      }
      @if (item.isJit) {
-      <div class="tw:bg-blue-500 tw:text-center tw:mt-2">
-        <span class="tw:text-2xl tw:font-bold tw:text-white">{{ 'NECK_LABEL.JIT' | translate | uppercase }}</span>
+      <div class="tw-bg-blue-500 tw-text-center tw-mt-2">
+        <span class="tw-text-2xl tw-font-bold tw-text-white">{{ 'NECK_LABEL.JIT' | translate | uppercase }}</span>
       </div>
      }
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.BARCODE' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.BARCODE' | translate }}: </span>
       <span>{{ item.barcode }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.SKU' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.SKU' | translate }}: </span>
       <span>{{ item.sku }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.QUANTITY' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.QUANTITY' | translate }}: </span>
       <span>{{ item.itemsQuantity }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.PARTNER_ID' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.PARTNER_ID' | translate }}: </span>
       <span>{{ item.customPartnerId }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.ORDER' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.ORDER' | translate }}: </span>
       <span>{{ item.orderId }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.PARTNER_ORDER' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.PARTNER_ORDER' | translate }}: </span>
       <span>{{ item.xId }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.STYLE' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.STYLE' | translate }}: </span>
       <span>{{ item.style }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.COLOR' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.COLOR' | translate }}: </span>
       <span>{{ item.color }}</span>
     </div>
-    <div class="tw:font-bold tw:text-red-500 tw:text-3xl">
+    <div class="tw-font-bold tw-text-red-500 tw-text-3xl">
       <span>{{ 'NECK_LABEL.SIZE' | translate }}: </span>
       <span>{{ item.size }}</span>
     </div>
     <div>
-      <span class="tw:font-semibold">{{ 'NECK_LABEL.TYPE' | translate }}: </span>
+      <span class="tw-font-semibold">{{ 'NECK_LABEL.TYPE' | translate }}: </span>
       <span>{{ item.sizeClass }}</span>
     </div>
   </div>

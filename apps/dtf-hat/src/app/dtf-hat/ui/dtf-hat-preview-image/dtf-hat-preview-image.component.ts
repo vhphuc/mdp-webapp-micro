@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ImageErrorUrlDirective } from '@shared/ui/directive/image-error-url.directive';
-import { DtfHatStore } from '../../dtf-hat.store';
+import { DtfHatStoreService } from '../../dtf-hat-store.service';
 
 @Component({
   selector: 'app-dtf-hat-preview-image',
@@ -11,6 +11,6 @@ import { DtfHatStore } from '../../dtf-hat.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DtfHatPreviewImageComponent {
-  store = inject(DtfHatStore);
+  store = inject(DtfHatStoreService);
   $item = this.store.$item;
 }

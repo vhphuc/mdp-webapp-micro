@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { DtfHatStore } from '../../dtf-hat.store';
+import { DtfHatStoreService } from '../../dtf-hat-store.service';
 import { UpperCasePipe } from '@angular/common';
 
 @Component({
@@ -15,6 +15,6 @@ import { UpperCasePipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DtfHatOrderDetailsComponent {
-  store = inject(DtfHatStore);
+  store = inject(DtfHatStoreService);
   $item = this.store.$item;
 }

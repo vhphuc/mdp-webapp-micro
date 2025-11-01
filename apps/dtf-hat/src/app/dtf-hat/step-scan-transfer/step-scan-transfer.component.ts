@@ -1,22 +1,23 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { KeepFocusDirective } from '@shared/ui/directive/keep-focus.directive';
+import { NzInputDirective } from 'ng-zorro-antd/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { KeepFocusDirective } from '@shared/ui/directive/keep-focus.directive';
-import { extractHatBarcode, extractUnitBarcode, isHatBarcode } from '@shared/util/helper/extract-barcode';
-import { NzInputDirective } from 'ng-zorro-antd/input';
+import { DtfHatStoreService } from '../dtf-hat-store.service';
 import { NzTypographyComponent } from 'ng-zorro-antd/typography';
-import { DtfHatStore } from '../dtf-hat.store';
+import { extractHatBarcode, extractUnitBarcode, isHatBarcode } from '@shared/util/helper/extract-barcode';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-step-scan-transfer',
   standalone: true,
-  imports: [KeepFocusDirective, NzInputDirective, ReactiveFormsModule, TranslateModule, NzTypographyComponent],
+  imports: [KeepFocusDirective, NzInputDirective, ReactiveFormsModule, TranslateModule, NzTypographyComponent, JsonPipe],
   templateUrl: './step-scan-transfer.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepScanTransferComponent {
-  store = inject(DtfHatStore);
+  store = inject(DtfHatStoreService);
   input = new FormControl('', { nonNullable: true });
   $error = this.store.$error;
 

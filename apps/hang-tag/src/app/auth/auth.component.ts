@@ -32,17 +32,17 @@ import { AuthService } from './auth.service';
     NzModalModule,
   ],
   template: `
-    <div class="tw:h-full tw:bg-gray-100">
-      <div class="tw:bg-primary tw:py-5 tw:text-center">
-        <img ngSrc="assets/icons/logo-white.png" alt="logo" height="58" width="90" />
-        <h3 class="tw:text-lg tw:text-white tw:mt-4">Monster Digital Platform</h3>
+    <div class="tw-h-full tw-bg-gray-100">
+      <div class="tw-bg-primary tw-py-5 tw-text-center">
+        <img [ngSrc]="'assets/icons/logo-white.png'" alt="logo" height="58" width="90" />
+        <h3 class="tw-text-lg tw-text-white tw-mt-4">Monster Digital Platform</h3>
       </div>
-      <div class="tw:mt-3">
-        <h1 class="tw:text-4xl tw:text-[#37bc9b] tw:text-center">{{ appName }}</h1>
+      <div class="tw-mt-3">
+        <h1 class="tw-text-4xl tw-text-[#37bc9b] tw-text-center">{{ appName }}</h1>
         <input
           type="text"
           id="login-input"
-          class="tw:opacity-0"
+          class="tw-opacity-0"
           appKeepFocus
           autocomplete="off"
           [formControl]="barcodeControl"
@@ -50,12 +50,12 @@ import { AuthService } from './auth.service';
           (keydown.space)="$event.preventDefault()" />
 
         <div *ngIf="errorMsg()">
-          <div class="tw:w-[550px] tw:mx-auto tw:border tw:border-solid tw:border-[#ebbebe] tw:rounded-md tw:overflow-hidden">
+          <div class="tw-w-[550px] tw-mx-auto tw-border tw-border-solid tw-border-[#ebbebe] tw-rounded-md tw-overflow-hidden">
             <div
-              class="tw:capitalize tw:text-sm tw:font-semibold tw:text-[#a94442] tw:bg-[#f2dede] tw:p-[10px] tw:border-0 tw:border-b tw:border-solid tw:border-[#ebbebe]">
+              class="tw-capitalize tw-text-sm tw-font-semibold tw-text-[#a94442] tw-bg-[#f2dede] tw-p-[10px] tw-border-0 tw-border-b tw-border-solid tw-border-[#ebbebe]">
               {{ 'AUTH.AUTH_CMP.INVALID_LOGIN' | translate }}
             </div>
-            <div class="tw:bg-white tw:text-[#da4453] tw:py-[25px] tw:text-2xl tw:text-center">
+            <div class="tw-bg-white tw-text-[#da4453] tw-py-[25px] tw-text-2xl tw-text-center">
               {{ errorMsg()!.errorKey | translate: errorMsg()!.paramError }}
             </div>
           </div>

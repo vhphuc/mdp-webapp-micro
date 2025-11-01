@@ -8,20 +8,20 @@ import { ScanBarcode } from '../hangtag.model';
   standalone: true,
   imports: [ImageErrorUrlDirective, NzTabsModule],
   host: {
-    class: 'tw:flex tw:flex-col',
+    class: 'tw-flex tw-flex-col',
   },
   template: `
-    <div class="tw:flex-1 tw:border-black tw:border-solid tw:border tw:relative tw:mt-3">
-      <nz-tabset nzType="card" class="tw:h-full tw:p-4" nzSize="large" [nzTabBarGutter]="5">
+    <div class="tw-flex-1 tw-border-black tw-border-solid tw-border tw-relative tw-mt-3">
+      <nz-tabset nzType="card" class="tw-h-full tw-p-4" nzSize="large" [nzTabBarGutter]="5">
         @for (location of barcode.locationAttributes; track location.location) {
           <nz-tab [nzTitle]="titleTemplate">
             <ng-template #titleTemplate>
-              <div class="tw:px-2 tw:h-6 tw:border tw:border-solid tw:font-semibold tw:text-sm tw:bg-white">
+              <div class="tw-px-2 tw-h-6 tw-border tw-border-solid tw-font-semibold tw-text-sm tw-bg-white">
                 {{ location.location }}
               </div>
             </ng-template>
 
-            <div class="tw:image-fill tw:h-full">
+            <div class="tw-image-fill tw-h-full">
               <img [src]="location.previewUrl" appImageErrorUrl />
             </div>
           </nz-tab>

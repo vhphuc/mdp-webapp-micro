@@ -7,7 +7,7 @@ import { TranslateStore } from '@shared/data-access/store/translate.store';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { EMPTY, Observable, tap, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { appApiHeader } from 'src/app/app.const';
+import { appApiHeader, appMdClientRole } from 'src/app/app.const';
 import { environment } from '../../../../environments/environment';
 import { GlobalSpinnerStore } from '@shared/ui/component/global-spinner/global-spinner.store';
 
@@ -23,7 +23,7 @@ export const interceptors = (req: HttpRequest<unknown>, next: HttpHandlerFn) => 
 
   const appNameHeader = appApiHeader;
   const token = lsStore.getToken();
-  const mdClientRole = 'DTF-Hat';
+  const mdClientRole = appMdClientRole;
   if (!req.context.get(BYPASS_AUTHORIZE)) {
     req = req.clone({
       url: !req.url.includes('http') ? environment.API_DOMAIN + req.url : req.url,

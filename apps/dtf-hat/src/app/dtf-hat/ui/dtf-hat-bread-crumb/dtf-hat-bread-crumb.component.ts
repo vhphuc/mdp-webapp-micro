@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NzBreadCrumbComponent, NzBreadCrumbItemComponent } from 'ng-zorro-antd/breadcrumb';
 import { TranslateModule } from '@ngx-translate/core';
 import { UpperCasePipe } from '@angular/common';
-import { DtfHatStore } from '../../dtf-hat.store';
+import { DtfHatStoreService } from '../../dtf-hat-store.service';
 import { DtfHatStep } from '../../dtf-hat.model';
 
 @Component({
@@ -14,7 +14,7 @@ import { DtfHatStep } from '../../dtf-hat.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DtfHatBreadCrumbComponent {
-  store = inject(DtfHatStore);
+  store = inject(DtfHatStoreService);
   $item = this.store.$item;
   $step = this.store.$step;
 

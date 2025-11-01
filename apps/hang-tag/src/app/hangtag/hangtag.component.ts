@@ -1,24 +1,24 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { AppLayoutComponent } from '@shared/ui/component/app-layout.component';
 import { NgIf, UpperCasePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ErrorResult } from '@shared/data-access/model/api/response';
+import { LocalStorageStore } from '@shared/data-access/store/local-storage.store';
+import { AppLayoutComponent } from '@shared/ui/component/app-layout.component';
+import { openPrintingPopup } from '@shared/ui/component/printing-popup';
+import { KeepFocusDirective } from '@shared/ui/directive/keep-focus.directive';
+import { extractUnitBarcode } from '@shared/util/helper/extract-barcode';
+import { NzInputDirective } from 'ng-zorro-antd/input';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTypographyComponent } from 'ng-zorro-antd/typography';
+import { ScanBarcode } from './hangtag.model';
+import { HangtagService } from './hangtag.service';
 import { HangtagStore } from './hangtag.store';
 import { HangtagBreadcrumbComponent } from './ui/hangtag-breadcrumb.component';
 import { HangtagConfigComponent } from './ui/hangtag-config.component';
-import { HangtagService } from './hangtag.service';
+import { HangtagInsertAttributesComponent } from './ui/hangtag-insert-attributes.component';
 import { HangtagItemInfoComponent } from './ui/hangtag-item-info.component';
 import { HangtagLocationAttributesComponent } from './ui/hangtag-location-attributes.component';
-import { KeepFocusDirective } from '@shared/ui/directive/keep-focus.directive';
-import { NzInputDirective } from 'ng-zorro-antd/input';
-import { NzTypographyComponent } from 'ng-zorro-antd/typography';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { HangtagInsertAttributesComponent } from './ui/hangtag-insert-attributes.component';
-import { LocalStorageStore } from '@shared/data-access/store/local-storage.store';
-import { ErrorResult } from '@shared/data-access/model/api/response';
-import { ScanBarcode } from './hangtag.model';
-import { openPrintingPopup } from '@shared/ui/component/printing-popup';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { extractUnitBarcode } from '@shared/util/helper/extract-barcode';
 import { openPrintShipLabelFailedModal } from '@shared/ui/component/print-ship-label-failed-modal';
 
 @Component({
@@ -41,7 +41,7 @@ import { openPrintShipLabelFailedModal } from '@shared/ui/component/print-ship-l
   ],
   providers: [HangtagStore],
   template: `
-    <app-layout [appName]="'Hang Tag'" [breadcrumbTplRef]="breadcrumbTplRef" [configTplRef]="configTplRef">
+    <app-layout [appName]="'HANG_TAG' | translate" [breadcrumbTplRef]="breadcrumbTplRef" [configTplRef]="configTplRef">
       <ng-template #breadcrumbTplRef>
         <app-hangtag-breadcrumb />
       </ng-template>
@@ -49,22 +49,22 @@ import { openPrintShipLabelFailedModal } from '@shared/ui/component/print-ship-l
         <app-hangtag-config />
       </ng-template>
 
-      <div class="tw:flex-1 tw:flex tw:gap-6">
-        <div class="tw:w-1/3 tw:flex tw:flex-col">
+      <div class="tw-flex-1 tw-flex tw-gap-6">
+        <div class="tw-w-1/3 tw-flex tw-flex-col">
           @if (barcode()) {
             <app-hangtag-item-info [barcode]="barcode()!" />
-            <app-hangtag-location-attributes [barcode]="barcode()!" class="tw:flex-1" />
+            <app-hangtag-location-attributes [barcode]="barcode()!" class="tw-flex-1" />
           }
         </div>
-        <div class="tw:flex-1 tw:flex tw:flex-col">
+        <div class="tw-flex-1 tw-flex tw-flex-col">
           <!-- Scan Input -->
-          <div class="tw:flex tw:gap-6">
-            <div class="tw:w-1/2">
-              <div class="tw:flex tw:items-center tw:gap-8">
-                <div class="tw:font-semibold tw:text-xl tw:text-right">
+          <div class="tw-flex tw-gap-6">
+            <div class="tw-w-1/2">
+              <div class="tw-flex tw-items-center tw-gap-8">
+                <div class="tw-font-semibold tw-text-xl tw-text-right">
                   <label for="scan-item-input">{{ 'NECK_LABEL.SCAN_ITEM' | translate | uppercase }}</label>
                 </div>
-                <div class="tw:flex-1">
+                <div class="tw-flex-1">
                   <input
                     id="scan-item-input"
                     type="text"
@@ -78,9 +78,9 @@ import { openPrintShipLabelFailedModal } from '@shared/ui/component/print-ship-l
                 </div>
               </div>
             </div>
-            <div class="tw:flex-1">
+            <div class="tw-flex-1">
               <div>
-                <span *ngIf="errorMsg() as msg" nz-typography [nzType]="'danger'" class="tw:text-2xl tw:font-bold tw:whitespace-pre-line">{{
+                <span *ngIf="errorMsg() as msg" nz-typography [nzType]="'danger'" class="tw-text-2xl tw-font-bold tw-whitespace-pre-line">{{
                   msg.errorKey | translate: msg.paramError
                 }}</span>
               </div>
@@ -88,7 +88,7 @@ import { openPrintShipLabelFailedModal } from '@shared/ui/component/print-ship-l
           </div>
           <!-- Main Panel -->
           @if (barcode()) {
-            <app-hangtag-insert-attributes [barcode]="barcode()!" class="tw:flex-1" />
+            <app-hangtag-insert-attributes [barcode]="barcode()!" class="tw-flex-1" />
           }
         </div>
       </div>

@@ -7,7 +7,7 @@ import { NzInputDirective } from 'ng-zorro-antd/input';
 import { NzTypographyComponent } from 'ng-zorro-antd/typography';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { DtfHatStore } from '../dtf-hat.store';
+import { DtfHatStoreService } from '../dtf-hat-store.service';
 import { extractHatBarcode, extractUnitBarcode, isHatBarcode } from '@shared/util/helper/extract-barcode';
 import { EDtfHatAppConfirmType } from '../dtf-hat.model';
 
@@ -30,7 +30,7 @@ import { EDtfHatAppConfirmType } from '../dtf-hat.model';
 })
 export class StepConfirmCompleteComponent {
   input = new FormControl('', { nonNullable: true });
-  store = inject(DtfHatStore);
+  store = inject(DtfHatStoreService);
   $item = this.store.$item;
 
   onScan() {

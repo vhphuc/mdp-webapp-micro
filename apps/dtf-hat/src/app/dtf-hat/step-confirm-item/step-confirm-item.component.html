@@ -1,21 +1,21 @@
-<div class="tw:flex tw:gap-8 tw:h-full">
-  <div class="tw:basis-1/4">
-    <div class="tw:flex tw:flex-col tw:justify-between tw:h-full">
+<div class="tw-flex tw-gap-8 tw-h-full">
+  <div class="tw-basis-1/4">
+    <div class="tw-flex tw-flex-col tw-justify-between tw-h-full">
       <app-dtf-hat-order-details />
       <app-dtf-hat-preview-image />
     </div>
   </div>
-  <div class="tw:flex-1 tw:flex tw:flex-col">
-    <div class="tw:flex tw:items-center tw:gap-8">
+  <div class="tw-flex-1 tw-flex tw-flex-col">
+    <div class="tw-flex tw-items-center tw-gap-8">
       <div>
-        <label for="confirm-item-input" class="tw:font-semibold tw:text-xl tw:whitespace-nowrap"
+        <label for="confirm-item-input" class="tw-font-semibold tw-text-xl tw-whitespace-nowrap"
           >{{ 'CONFIRM' | translate }} {{ 'ITEM' | translate }}</label
         >
       </div>
       <div>
         <input
           id="confirm-item-input"
-          class="tw:w-[400px]"
+          class="tw-w-[400px]"
           type="text"
           nz-input
           nzSize="large"
@@ -26,22 +26,22 @@
       </div>
       <div>
         @if ($isShowConfirmRejectPopup()) {
-          <div class="tw:border-solid">
-            <div class="tw:bg-gray-500 tw:p-2">
-              <span class="tw:text-white tw:text-xl">{{ 'CONFIRM_REJECT_TRANSFER' | translate }}</span>
+          <div class="tw-border-solid">
+            <div class="tw-bg-gray-500 tw-p-2">
+              <span class="tw-text-white tw-text-xl">{{ 'CONFIRM_REJECT_TRANSFER' | translate }}</span>
             </div>
-            <div class="tw:py-5 tw:px-4 tw:text-center tw:text-2xl">
+            <div class="tw-py-5 tw-px-4 tw-text-center tw-text-2xl">
               <div>
                 <span>{{ 'DO_YOU_WANT_TO_REJECT_THIS_TRANSFER' | translate }}</span>
               </div>
             </div>
-            <div class="tw:flex tw:justify-between">
+            <div class="tw-flex tw-justify-between">
               <div
-                class="tw:bg-red-500 tw:text-white tw:text-xl tw:px-3 tw:py-2 tw:cursor-pointer"
+                class="tw-bg-red-500 tw-text-white tw-text-xl tw-px-3 tw-py-2 tw-cursor-pointer"
                 (click)="$isShowConfirmRejectPopup.set(false)">
                 {{ 'CANCEL' | translate }}
               </div>
-              <div class="tw:bg-yellow-300 tw:text-xl tw:px-3 tw:py-2 tw:cursor-pointer" (click)="confirmReject()">
+              <div class="tw-bg-yellow-300 tw-text-xl tw-px-3 tw-py-2 tw-cursor-pointer" (click)="confirmReject()">
                 {{ 'ACCEPT' | translate }}
               </div>
             </div>
@@ -49,17 +49,17 @@
         }
         <!-- Error -->
         @if (store.$error(); as err) {
-          <span nz-typography nzType="danger" class="tw:text-2xl tw:font-semibold">{{ err.errorKey | translate: err.paramError }}</span>
+          <span nz-typography nzType="danger" class="tw-text-2xl tw-font-semibold">{{ err.errorKey | translate: err.paramError }}</span>
         }
       </div>
     </div>
-    <div class="tw:flex tw:justify-center tw:my-10">
-      <div class="tw:text-xl">
-        <span class="tw:font-bold">{{ 'ITEM_STATUS' | translate }}: </span> <span>{{ $item()!.statusDescription }}</span>
+    <div class="tw-flex tw-justify-center tw-my-10">
+      <div class="tw-text-xl">
+        <span class="tw-font-bold">{{ 'ITEM_STATUS' | translate }}: </span> <span>{{ $item()!.statusDescription }}</span>
       </div>
     </div>
-    <div class="tw:flex-1 tw:image-fill">
-      <img [src]="$item()!.previewUrl" class="tw:object-top" appImageErrorUrl />
+    <div class="tw-flex-1 tw-image-fill">
+      <img [src]="$item()!.previewUrl" class="tw-object-top" appImageErrorUrl />
     </div>
   </div>
 </div>

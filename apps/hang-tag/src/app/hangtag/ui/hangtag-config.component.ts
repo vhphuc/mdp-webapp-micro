@@ -45,7 +45,7 @@ import { AuthStore } from 'src/app/auth/auth.store';
     @if (!isConfiguring()) {
       <nz-space [nzSplit]="spaceSplit">
         <ng-template #spaceSplit>
-          <span nz-icon nzType="minus" nzTheme="outline" class="tw:text-white"></span>
+          <span nz-icon nzType="minus" nzTheme="outline" class="tw-text-white"></span>
         </ng-template>
 
         <!-- Factory -->
@@ -53,8 +53,8 @@ import { AuthStore } from 'src/app/auth/auth.store';
           *nzSpaceItem
           nz-dropdown
           [nzDropdownMenu]="factoryMenu"
-          class="tw:text-white tw:cursor-pointer tw:font-semibold"
-          [class.tw:pointer-events-none]="!isAdmin()">
+          class="tw-text-white tw-cursor-pointer tw-font-semibold"
+          [class.tw-pointer-events-none]="!isAdmin()">
           {{ 'FACTORY' | translate }}: {{ config().factory!.name }}
         </div>
         <nz-dropdown-menu #factoryMenu="nzDropdownMenu">
@@ -62,10 +62,10 @@ import { AuthStore } from 'src/app/auth/auth.store';
             @for (factory of userFactoriesData(); track factory.id) {
               <li
                 nz-menu-item
-                class="tw:hover:bg-primary-light tw:hover:text-white tw:cursor-pointer"
+                class="hover:tw-bg-primary-light hover:tw-text-white tw-cursor-pointer"
                 (click)="onClickFactory(factory)"
-                [ngClass]="config().factory!.id === factory.id ? 'tw:bg-primary tw:text-white' : ''">
-                <span class="tw:inline-block tw:text-sm tw:w-full">{{ factory.name }}</span>
+                [ngClass]="config().factory!.id === factory.id ? 'tw-bg-primary tw-text-white' : ''">
+                <span class="tw-inline-block tw-text-sm tw-w-full">{{ factory.name }}</span>
               </li>
             }
           </ul>
@@ -76,18 +76,18 @@ import { AuthStore } from 'src/app/auth/auth.store';
           *nzSpaceItem
           nz-dropdown
           [nzDropdownMenu]="hangtagPrinterMenu"
-          class="tw:text-white tw:cursor-pointer tw:font-semibold"
-          [class.tw:pointer-events-none]="!isAdmin()">
+          class="tw-text-white tw-cursor-pointer tw-font-semibold"
+          [class.tw-pointer-events-none]="!isAdmin()">
           {{ 'SHIPPING.HANGTAG_PRINTER' | translate }}: {{ config().hangtagPrinter!.printerName }}
         </div>
         <nz-dropdown-menu #hangtagPrinterMenu="nzDropdownMenu">
-          <ul nz-menu class="tw:max-h-96 tw:overflow-y-auto tw:slim-scrollbar">
+          <ul nz-menu class="tw-max-h-96 tw-overflow-y-auto tw-slim-scrollbar">
             @for (hangtagPrinter of hangtagPrintersData(); track hangtagPrinter.id) {
               <li
                 nz-menu-item
-                class="tw:hover:bg-primary-light tw:hover:text-white tw:cursor-pointer"
+                class="hover:tw-bg-primary-light hover:tw-text-white tw-cursor-pointer"
                 (click)="onClickHangtagPrinter(hangtagPrinter)"
-                [ngClass]="config().hangtagPrinter!.id === hangtagPrinter.id ? 'tw:bg-primary tw:text-white' : ''">
+                [ngClass]="config().hangtagPrinter!.id === hangtagPrinter.id ? 'tw-bg-primary tw-text-white' : ''">
                 <span>{{ hangtagPrinter.printerName }}</span>
               </li>
             }
@@ -104,8 +104,8 @@ import { AuthStore } from 'src/app/auth/auth.store';
       (nzOnOk)="onConfigModalAccept('factory-modal')"
       [nzOkDisabled]="!config().factory">
       <ng-container *nzModalContent>
-        <nz-form-item class="tw:mb-0">
-          <nz-form-label [nzSm]="4" nzRequired class="tw:font-semibold">{{ 'FACTORY' | translate }} </nz-form-label>
+        <nz-form-item class="tw-mb-0">
+          <nz-form-label [nzSm]="4" nzRequired class="tw-font-semibold">{{ 'FACTORY' | translate }} </nz-form-label>
           <nz-form-control [nzSm]="20">
             <nz-select id="factory-select" [ngModel]="config().factory" (ngModelChange)="signalConfigFactoryChange($event)">
               @for (factory of userFactoriesData(); track factory.id) {
@@ -123,8 +123,8 @@ import { AuthStore } from 'src/app/auth/auth.store';
       (nzOnCancel)="onConfigModalCancel()"
       (nzOnOk)="onConfigModalAccept('hangtag-printer-modal')">
       <ng-container *nzModalContent>
-        <nz-form-item class="tw:mb-0">
-          <nz-form-label [nzSm]="7" class="tw:font-semibold">{{ 'SHIPPING.HANGTAG_PRINTER' | translate }} </nz-form-label>
+        <nz-form-item class="tw-mb-0">
+          <nz-form-label [nzSm]="7" class="tw-font-semibold">{{ 'SHIPPING.HANGTAG_PRINTER' | translate }} </nz-form-label>
           <nz-form-control [nzSm]="17">
             <nz-select
               id="hangtag-printer-select"

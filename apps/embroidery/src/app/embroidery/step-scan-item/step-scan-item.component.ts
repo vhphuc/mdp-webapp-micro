@@ -25,14 +25,14 @@ import { ImageErrorUrlDirective } from '@shared/ui/directive/image-error-url.dir
     ImageErrorUrlDirective,
   ],
   template: `
-    <div class="tw:h-full tw:flex tw:flex-col">
-      <div class="tw:flex tw:gap-6">
-        <div class="tw:w-1/2">
-          <div class="tw:flex tw:items-center tw:gap-8">
-            <div class="tw:font-semibold tw:text-xl tw:text-right">
+    <div class="tw-h-full tw-flex tw-flex-col">
+      <div class="tw-flex tw-gap-6">
+        <div class="tw-w-1/2">
+          <div class="tw-flex tw-items-center tw-gap-8">
+            <div class="tw-font-semibold tw-text-xl tw-text-right">
               <label for="scan-item-input">{{ 'NECK_LABEL.SCAN_ITEM' | translate | uppercase }}</label>
             </div>
-            <div class="tw:flex-1">
+            <div class="tw-flex-1">
               <input
                 id="scan-item-input"
                 type="text"
@@ -46,23 +46,23 @@ import { ImageErrorUrlDirective } from '@shared/ui/directive/image-error-url.dir
             </div>
           </div>
         </div>
-        <div class="tw:w-1/2 tw:max-w-1/2">
+        <div class="tw-w-1/2 tw-max-w-1/2">
           @if (scanMsg()) {
             <span
               nz-typography
               [nzType]="scanMsg()!.color === 'red' ? 'danger' : 'success'"
-              class="tw:text-2xl tw:font-bold tw:whitespace-pre-line"
+              class="tw-text-2xl tw-font-bold tw-whitespace-pre-line"
               [innerHTML]="scanMsg()!.key | translate: scanMsg()!.params"></span>
           }
         </div>
       </div>
       @if (item()) {
-        <div class="tw:text-center tw:my-2 tw:text-xl">
-          <span class="tw:font-semibold">{{ 'NECK_LABEL.ITEM_STATUS' | translate }}: </span>
+        <div class="tw-text-center tw-my-2 tw-text-xl">
+          <span class="tw-font-semibold">{{ 'NECK_LABEL.ITEM_STATUS' | translate }}: </span>
           <span> {{ item()!.statusName | uppercase }}</span>
         </div>
-        <div class="tw:border tw:border-solid tw:flex-1 tw:p-1">
-          <div class="tw:h-full tw:image-fill">
+        <div class="tw-border tw-border-solid tw-flex-1 tw-p-1">
+          <div class="tw-h-full tw-image-fill">
             <img [src]="item()!.embFileUrl" appImageErrorUrl />
           </div>
         </div>
