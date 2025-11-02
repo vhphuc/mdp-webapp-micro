@@ -27,7 +27,7 @@ export class ImgPreviewService {
       scrollStrategy: this.overlay.scrollStrategies.block(),
       positionStrategy: this.overlay.position().global(),
       disposeOnNavigation: true,
-      backdropClass: ['tw:fixed', 'tw:inset-0', 'tw:h-full', 'tw:z-[2000]', 'tw:bg-[rgba(0,0,0,.45)]'],
+      backdropClass: ['tw-fixed', 'tw-inset-0', 'tw-h-full', 'tw-z-[2000]', 'tw-bg-[rgba(0,0,0,.45)]'],
     });
 
     return this.overlay.create(overLayConfig);

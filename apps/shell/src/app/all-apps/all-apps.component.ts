@@ -7,14 +7,14 @@ import { NzIconExtraComponent } from '../shared/ui/component/nz-icon-extra.compo
   standalone: true,
   imports: [NzIconModule, NzIconExtraComponent],
   template: `
-    <div class="tw:h-full tw:flex tw:flex-col tw:justify-center tw:items-center">
-      <div class="tw:mb-5 tw:font-bold tw:text-2xl">Choose <span class="tw:text-orange-600">Application</span></div>
-      <div class="tw:flex tw:flex-wrap tw:items-center tw:justify-center tw:w-4/5">
+    <div class="tw-h-full tw-flex tw-flex-col tw-justify-center tw-items-center">
+      <div class="tw-mb-5 tw-font-bold tw-text-2xl">Choose <span class="tw-text-orange-600">Application</span></div>
+      <div class="tw-flex tw-flex-wrap tw-items-center tw-justify-center tw-w-4/5">
         @for (app of allApps; track app.name) {
           <div
-            class="tw:rounded tw:cursor-pointer tw:m-4 tw:p-1 tw:w-36 tw:h-24 tw:bg-orange-600 tw:text-center tw:text-white tw:flex tw:flex-col tw:justify-center"
+            class="tw-rounded tw-cursor-pointer tw-m-4 tw-p-1 tw-w-36 tw-h-24 tw-bg-orange-600 tw-text-center tw-text-white tw-flex tw-flex-col tw-justify-center"
             (click)="navigateTo(app.url)">
-            <app-nz-icon-extra [icon]="app.icon" [iconClass]="'tw:text-white tw:text-2xl'"></app-nz-icon-extra>
+            <app-nz-icon-extra [icon]="app.icon" [iconClass]="'tw-text-white tw-text-2xl'"></app-nz-icon-extra>
             <span>{{ app.name }}</span>
           </div>
         }

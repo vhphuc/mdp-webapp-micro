@@ -1,0 +1,22 @@
+<app-layout appName="JIT RECEIVE" [breadcrumbTplRef]="breadcrumbTplRef" [configTplRef]="configTplRef">
+  <ng-template #breadcrumbTplRef><app-jit-receive-bread-crumb /></ng-template>
+  <ng-template #configTplRef><app-jit-receive-config /></ng-template>
+
+  @switch (step()) {
+    @case (JitReceiveStep.SCAN_TRACKING) {
+      <app-step-scan-tracking class="tw-flex-1 tw-flex tw-flex-col" />
+    }
+    @case (JitReceiveStep.SCAN_ITEM) {
+      <app-step-scan-item class="tw-flex-1 tw-flex tw-flex-col" />
+    }
+    @case (JitReceiveStep.CONFIRM_RECEIPT) {
+      <app-step-confirm-receipt class="tw-flex-1 tw-flex tw-flex-col" />
+    }
+    @case (JitReceiveStep.ITEM_MISSING) {
+      <app-step-item-missing class="tw-flex-1 tw-flex tw-flex-col" />
+    }
+    @case (JitReceiveStep.ITEM_DAMAGED) {
+      <app-step-item-missing class="tw-flex-1 tw-flex tw-flex-col" />
+    }
+  }
+</app-layout>

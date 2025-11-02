@@ -8,10 +8,10 @@ import { StationsGetApi } from '../model/api/station-api';
 import { UserFactoriesGetApi } from '../model/api/user-factories-get-api';
 import { AvailableLanguage } from '../store/translate.store';
 
-export interface DtfHatConfigKey {
+export interface JitReceivingConfigKey {
   factory: UserFactoriesGetApi.ResponseItem;
   station: StationsGetApi.ResponseItem;
-  regularPrinter: PrintersGetApi.ResponseItem;
+  regularReceivingPrinter: PrintersGetApi.ResponseItem;
 }
 
 export interface UserKey {
@@ -25,7 +25,7 @@ export interface UserKey {
 
 export interface LocalStorageState {
   chosenLang: AvailableLanguage | null;
-  dtfHatConfig: DtfHatConfigKey | null;
+  jitReceivingConfig: JitReceivingConfigKey | null;
 
   //region remove when log out
   token: string | null;
@@ -43,7 +43,7 @@ export class LocalStorageStore extends ComponentStore<LocalStorageState> {
   onAppInit() {
     const initialState: LocalStorageState = {
       chosenLang: this.getChosenLang(),
-      dtfHatConfig: this.getDtfHatConfig(),
+      jitReceivingConfig: this.getJitReceivingConfig(),
 
       token: this.getToken(),
       user: this.getUser(),
@@ -98,28 +98,28 @@ export class LocalStorageStore extends ComponentStore<LocalStorageState> {
   }
   //endregion
 
-  //region DTF Hat Config
+  //region JIT Receiving Config
 
-  dtfHatConfigKey = 'dtf-hat-config';
-  getDtfHatConfig() {
-    return lsGetKey<DtfHatConfigKey>(this.dtfHatConfigKey);
+  jitReceivingConfigKey = 'jit-receiving-config';
+  getJitReceivingConfig() {
+    return lsGetKey<JitReceivingConfigKey>(this.jitReceivingConfigKey);
   }
-  setDtfHatConfig(value: {
+  setJitReceivingConfig(value: {
     factory: UserFactoriesGetApi.ResponseItem | null;
     station: StationsGetApi.ResponseItem | null;
-    regularPrinter: PrintersGetApi.ResponseItem | null;
+    regularReceivingPrinter: PrintersGetApi.ResponseItem | null;
   }) {
-    const notNullValue: DtfHatConfigKey = {
+    const notNullValue: JitReceivingConfigKey = {
       factory: value.factory!,
       station: value.station!,
-      regularPrinter: value.regularPrinter!,
+      regularReceivingPrinter: value.regularReceivingPrinter!,
     };
-    lsSetKey(this.dtfHatConfigKey, notNullValue);
-    this.patchState({ dtfHatConfig: notNullValue });
+    lsSetKey(this.jitReceivingConfigKey, notNullValue);
+    this.patchState({ jitReceivingConfig: notNullValue });
   }
-  removeDtfHatConfig() {
-    lsRemoveKey(this.dtfHatConfigKey);
-    this.patchState({ dtfHatConfig: null });
+  removeJitReceivingConfig() {
+    lsRemoveKey(this.jitReceivingConfigKey);
+    this.patchState({ jitReceivingConfig: null });
   }
 
   //endregion

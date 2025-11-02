@@ -1,0 +1,70 @@
+@if (tracking(); as tracking) {
+  <div>
+    <div class="tw-text-xl">
+      <span class="tw-font-semibold">{{ 'VENDOR' | translate }}: </span>
+      <span>{{ tracking.vendor }}</span>
+    </div>
+    <div class="tw-text-xl">
+      <span class="tw-font-semibold">{{ 'PO_#' | translate }}: </span>
+      <span>{{ tracking.poNumber }}</span>
+      <a [href]="tracking.pickTicketsUrl" target="_blank">
+        <span class="tw-ml-1 tw-text-lg" nz-icon nzType="file-pdf" nzTwotoneColor="#e10027" nzTheme="twotone"></span>
+      </a>
+    </div>
+    <div class="tw-text-xl">
+      <span class="tw-font-semibold">{{ 'PO_TYPE' | translate }}: </span>
+      <span>{{ PurchaseOrderTypeDescription.get(tracking.poType) }}</span>
+    </div>
+    <div class="tw-text-xl">
+      <span class="tw-font-semibold">{{ 'INVOICE_#' | translate }}: </span>
+      <span>{{ tracking.invoiceNumber }}</span>
+    </div>
+    <div class="tw-text-xl">
+      <span class="tw-font-semibold">{{ 'PACKAGE_ID' | translate }}: </span>
+      <span>{{ tracking.packageBarcode }}</span>
+    </div>
+    <div class="tw-text-xl">
+      <span class="tw-font-semibold">{{ 'PO_CREATED' | translate }}: </span>
+      <span>{{ tracking.poCreatedDate | date: 'MMM d' }}</span>
+    </div>
+  </div>
+  <!-- Received Qty -->
+  <div>
+    <div class="tw-text-xl" [class.tw-text-green-600]="tracking.receivedQty === tracking.totalQuantity">
+      <span class="tw-font-semibold">{{ 'RECEIVED_QTY' | translate }}: </span>
+      <span>{{ tracking.receivedQty }} {{ 'OF' | translate }} {{ tracking.totalQuantity }}</span>
+    </div>
+    <div class="tw-flex tw-flex-wrap tw-gap-2 tw-mt-2">
+      @for (group of packageUnitGroups(); track group.styleColorSizeCoo) {
+        <div>
+          <div
+            class="tw-image-fill tw-bg-white tw-h-32 tw-w-20"
+            (click)="openAcceptedItemPopup(group.styleColorSizeCoo, group.acceptedPackageUnits.length)">
+            <img [src]="group.preview" appImageErrorUrl />
+          </div>
+          <div class="tw-text-center tw-text-xl tw-w-20">{{ group.acceptedPackageUnits.length }}/{{ group.totalQty }}</div>
+        </div>
+      }
+    </div>
+  </div>
+  <!-- Missing/Damaged Qty -->
+  <div>
+    <div
+      class="tw-text-xl"
+      [class.tw-text-red-500]="tracking.missingQty || tracking.damagedQty"
+      [class.tw-text-green-600]="tracking.receivedQty === tracking.totalQuantity">
+      <span class="tw-font-semibold">{{ 'MISSING_DAMAGED_QTY' | translate }}: </span>
+      <span>{{ tracking.missingQty + tracking.damagedQty }}</span>
+    </div>
+    <div class="tw-flex tw-flex-wrap tw-gap-2 tw-mt-2">
+      @for (group of rejectedPackageUnitGroups(); track group.styleColorSizeCoo) {
+        <div>
+          <div class="tw-image-fill tw-bg-white tw-h-32 tw-w-20" (click)="openRejectedItemPopup(group.styleColorSizeCoo)">
+            <img [src]="group.packageUnits[0].previewImage ?? ''" appImageErrorUrl />
+          </div>
+          <div class="tw-text-center tw-text-xl">x {{ group.packageUnits.length }}</div>
+        </div>
+      }
+    </div>
+  </div>
+}

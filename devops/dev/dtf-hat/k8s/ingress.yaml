@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/ingress.class: azure/application-gateway
 spec:
   rules:
-    - host: mdpdev-m.monsterdigital.biz
+    - host: mdpdev-w.monsterdigital.biz
       http:
         paths:
           - path: /dtf-hat
@@ -16,4 +16,4 @@ spec:
               service:
                 name: webapp-dtf-hat
                 port:
-                  number: 80
+                  number: 8080

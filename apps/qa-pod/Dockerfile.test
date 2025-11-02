@@ -1,15 +1,21 @@
 FROM node:20-alpine AS build
+
 WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
-RUN yarn install
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
+RUN pnpm install
 
 COPY ./src ./src
 COPY ./tsconfig.json .
 COPY ./tsconfig.app.json .
 COPY ./angular.json .
-COPY .postcssrc.json .
-
-RUN yarn build --configuration=test
+COPY ./tailwind.config.js .
+COPY ./tsconfig.worker.json .
+ 
+RUN pnpm build --configuration=test
 
 FROM nginxinc/nginx-unprivileged:alpine
 COPY --from=build /usr/src/app/dist/qa-pod/browser /usr/share/nginx/html

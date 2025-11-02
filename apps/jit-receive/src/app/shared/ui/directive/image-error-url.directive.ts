@@ -10,6 +10,6 @@ export class ImageErrorUrlDirective {
 
   @HostListener('error')
   ifSrcInvalid() {
-    (this._el.nativeElement as HTMLImageElement).src = '/assets/images/no-image-available.jpg';
+    (this._el.nativeElement as HTMLImageElement).src = 'assets/images/no-image-available.jpg';
   }
 }

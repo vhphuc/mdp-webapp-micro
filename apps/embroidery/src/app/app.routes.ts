@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { appTitle } from './app.const';
-import { AuthStore } from './auth/auth.store';
+import { AuthStore } from 'src/app/auth/auth.store';
 import { inject } from '@angular/core';
 
 export const routes: Routes = [

@@ -32,7 +32,7 @@ export const interceptors = (req: HttpRequest<unknown>, next: HttpHandlerFn) => 
         StandardTimeZoneName: `${Intl.DateTimeFormat().resolvedOptions().timeZone}`,
         MD_CLIENT_TYPE: 'Browser',
         MD_CLIENT_ROLE: mdClientRole,
-        MD_CLIENT_NAME: lsStore.getDtfHatConfig()?.station.stationName ?? '',
+        MD_CLIENT_NAME: lsStore.getMugConfig()?.station.stationName ?? '',
         AppLogin: lsStore.getUser()?.appLogin ?? '',
         AppName: appNameHeader,
       },

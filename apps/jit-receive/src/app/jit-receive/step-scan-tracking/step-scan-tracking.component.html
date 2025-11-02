@@ -1,0 +1,50 @@
+<div class="tw-flex tw-gap-8">
+  <div class="tw-basis-1/4">
+    <app-jit-receive-left-panel />
+  </div>
+  <div class="tw-flex-1">
+    <!-- Scan Input -->
+    <div class="tw-flex tw-items-center tw-gap-8">
+      <div class="tw-basis-52 tw-text-right">
+        <label for="scan-tracking-input" class="tw-font-semibold tw-text-xl">{{ 'SCAN' | translate }} {{ 'TRACKING_#' | translate }}</label>
+      </div>
+      <div class="tw-basis-1/2">
+        <input
+          id="scan-tracking-input"
+          class="tw-max-w-[500px]"
+          type="text"
+          nz-input
+          nzSize="large"
+          [formControl]="input"
+          (keyup.enter)="onScan()"
+          appKeepFocus
+          focusOnInitOnly />
+      </div>
+    </div>
+    <!-- Error -->
+    @if (error(); as err) {
+      <div class="tw-my-3 tw-text-center">
+        <span nz-typography nzType="danger" class="tw-text-2xl tw-font-semibold">{{ err.errorKey | translate: err.paramError }}</span>
+      </div>
+    }
+
+    <!-- Final Message -->
+    @if (isDone()) {
+      <div class="tw-mt-[15%] tw-text-center tw-text-5xl tw-leading-normal tw-font-bold tw-flex tw-flex-col tw-gap-2">
+        <span nz-typography nzType="success">{{ 'PO_RECEIPT_COMPLETE' | translate }}</span>
+        @if (confirmedMsg(); as receivedMsg) {
+          <span nz-typography nzType="success" class="tw-whitespace-pre-line">{{
+            receivedMsg.message | translate: receivedMsg.paramSuccess
+          }}</span>
+        }
+
+        @if (missingQty()) {
+          <span nz-typography nzType="danger">{{ 'X1_MISSING_ITEMS_WILL_BE_REORDERED' | translate: { x1: missingQty() } }}</span>
+        }
+        @if (damagedQty()) {
+          <span nz-typography nzType="danger">{{ 'X1_DAMAGED_ITEMS_WILL_BE_REORDERED' | translate: { x1: damagedQty() } }}</span>
+        }
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<nz-breadcrumb class="tw-font-semibold [&_.ant-breadcrumb-separator]:tw-text-white">
+  <nz-breadcrumb-item>
+    <span class="tw-underline tw-cursor-pointer tw-text-white" (click)="resetScanProcess()">JIT RECEIVE</span>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item class="tw-text-white tw-uppercase">
+    @switch (step()) {
+      @case (JitReceiveStep.SCAN_TRACKING) {
+        <span>{{ 'SCAN' | translate | uppercase }} {{ 'TRACKING_#' | translate | uppercase }}</span>
+      }
+      @case (JitReceiveStep.SCAN_ITEM) {
+        <span>{{ 'SCAN' | translate | uppercase }} {{ 'ITEM' | translate | uppercase }}</span>
+      }
+      @case (JitReceiveStep.CONFIRM_RECEIPT) {
+        <span>{{ 'CONFIRM_RECEIPT' | translate | uppercase }}</span>
+      }
+      @case (JitReceiveStep.ITEM_MISSING) {
+        <span>{{ 'CONFIRM_RECEIPT' | translate | uppercase }}</span>
+      }
+      @case (JitReceiveStep.ITEM_DAMAGED) {
+        <span>{{ 'CONFIRM_RECEIPT' | translate | uppercase }}</span>
+      }
+    }
+  </nz-breadcrumb-item>
+</nz-breadcrumb>

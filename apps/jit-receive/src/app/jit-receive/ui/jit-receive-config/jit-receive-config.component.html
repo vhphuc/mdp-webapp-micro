@@ -1,0 +1,139 @@
+@if (!configStore.$isConfiguring()) {
+  <nz-space [nzSplit]="spaceSplit">
+    <ng-template #spaceSplit>
+      <span nz-icon nzType="minus" nzTheme="outline" class="tw-text-white"></span>
+    </ng-template>
+
+    <!-- Factory -->
+    <div
+      *nzSpaceItem
+      nz-dropdown
+      [nzDropdownMenu]="factoryMenu"
+      class="tw-text-white tw-cursor-pointer tw-font-semibold"
+      [class.tw-pointer-events-none]="!$isAdmin()">
+      {{ 'FACTORY' | translate }}: {{ $config().factory!.name }}
+    </div>
+    <nz-dropdown-menu #factoryMenu="nzDropdownMenu">
+      <ul nz-menu>
+        @for (factory of configStore.$factories(); track factory.id) {
+          <li
+            nz-menu-item
+            class="hover:tw-bg-primary-light hover:tw-text-white tw-cursor-pointer"
+            (click)="onClickFactory(factory)"
+            [ngClass]="$config().factory!.id === factory.id ? 'tw-bg-primary tw-text-white' : ''">
+            <span class="tw-inline-block tw-text-sm tw-w-full">{{ factory.name }}</span>
+          </li>
+        }
+      </ul>
+    </nz-dropdown-menu>
+    <!-- Station -->
+    <div
+      *nzSpaceItem
+      nz-dropdown
+      [nzDropdownMenu]="stationMenu"
+      class="tw-text-white tw-cursor-pointer tw-font-semibold"
+      [class.tw-pointer-events-none]="!$isAdmin()">
+      {{ 'STATION' | translate }}: {{ $config().station!.stationName }}
+    </div>
+    <nz-dropdown-menu #stationMenu="nzDropdownMenu">
+      <ul nz-menu class="tw-max-h-96 tw-overflow-y-auto tw-slim-scrollbar">
+        @for (station of configStore.$station(); track station.id) {
+          <li
+            nz-menu-item
+            class="hover:tw-bg-primary-light hover:tw-text-white tw-cursor-pointer"
+            (click)="onClickStation(station)"
+            [ngClass]="$config().station!.id === station.id ? 'tw-bg-primary tw-text-white' : ''">
+            <span>{{ station.stationName }}</span>
+          </li>
+        }
+      </ul>
+    </nz-dropdown-menu>
+    <!-- Regular Receiving Printer -->
+    <div
+      *nzSpaceItem
+      nz-dropdown
+      [nzDropdownMenu]="regularReceivingPrinterMenu"
+      class="tw-text-white tw-cursor-pointer tw-font-semibold"
+      [class.tw-pointer-events-none]="!$isAdmin()">
+      {{ 'REGULAR_RECEIVING_PRINTER' | translate }}: {{ $config().regularReceivingPrinter!.printerName }}
+    </div>
+    <nz-dropdown-menu #regularReceivingPrinterMenu="nzDropdownMenu">
+      <ul nz-menu class="tw-max-h-96 tw-overflow-y-auto tw-slim-scrollbar">
+        @for (printer of configStore.$regularReceivingPrinter(); track printer.id) {
+          <li
+            nz-menu-item
+            class="hover:tw-bg-primary-light hover:tw-text-white tw-cursor-pointer"
+            (click)="onClickRegularReceivingPrinter(printer)"
+            [ngClass]="$config().regularReceivingPrinter!.id === printer.id ? 'tw-bg-primary tw-text-white' : ''">
+            <span>{{ printer.printerName }}</span>
+          </li>
+        }
+      </ul>
+    </nz-dropdown-menu>
+  </nz-space>
+}
+
+<!-- Factory -->
+<nz-modal
+  [nzVisible]="configStore.$isFactoryModalVisible()"
+  [nzTitle]="'FACTORY' | translate"
+  (nzOnCancel)="onConfigModalCancel()"
+  (nzOnOk)="onConfigModalAccept('factory-modal')"
+  [nzOkDisabled]="!$config().factory">
+  <ng-container *nzModalContent>
+    <nz-form-item class="tw-mb-0">
+      <nz-form-label [nzSm]="4" nzRequired class="tw-font-semibold">{{ 'FACTORY' | translate }}</nz-form-label>
+      <nz-form-control [nzSm]="20">
+        <nz-select id="factory-select" [ngModel]="$config().factory" (ngModelChange)="signalConfigFactoryChange($event)">
+          @for (factory of configStore.$factories(); track factory.id) {
+            <nz-option [nzValue]="factory" [nzLabel]="factory.name"></nz-option>
+          }
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+</nz-modal>
+<!-- Station -->
+<nz-modal
+  [nzVisible]="configStore.$isStationModalVisible()"
+  [nzTitle]="'STATION' | translate"
+  (nzOnCancel)="onConfigModalCancel()"
+  (nzOnOk)="onConfigModalAccept('station-modal')"
+  [nzOkDisabled]="!$config().station">
+  <ng-container *nzModalContent>
+    <nz-form-item class="tw-mb-0">
+      <nz-form-label [nzSm]="4" nzRequired class="tw-font-semibold">{{ 'STATION' | translate }}</nz-form-label>
+      <nz-form-control [nzSm]="20">
+        <nz-select id="station-select" [ngModel]="$config().station" (ngModelChange)="signalConfigStationChange($event)" nzShowSearch>
+          @for (station of configStore.$station(); track station.id) {
+            <nz-option [nzValue]="station" [nzLabel]="station.stationName"></nz-option>
+          }
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+</nz-modal>
+<!-- Regular Receiving Printer  -->
+<nz-modal
+  [nzVisible]="configStore.$isRegularReceivingPrinterModalVisible()"
+  [nzTitle]="'REGULAR_RECEIVING_PRINTER' | translate"
+  (nzOnCancel)="onConfigModalCancel()"
+  (nzOnOk)="onConfigModalAccept('regular-receiving-printer-modal')"
+  [nzOkDisabled]="!$config().regularReceivingPrinter">
+  <ng-container *nzModalContent>
+    <nz-form-item class="tw-mb-0">
+      <nz-form-label [nzSm]="10" nzRequired class="tw-font-semibold">{{ 'REGULAR_RECEIVING_PRINTER' | translate }}</nz-form-label>
+      <nz-form-control [nzSm]="14">
+        <nz-select
+          id="regular-printer-select"
+          [ngModel]="$config().regularReceivingPrinter"
+          (ngModelChange)="signalConfigRegularReceivingPrinterChange($event)"
+          nzShowSearch>
+          @for (printer of configStore.$regularReceivingPrinter(); track printer.id) {
+            <nz-option [nzValue]="printer" [nzLabel]="printer.printerName"></nz-option>
+          }
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+</nz-modal>

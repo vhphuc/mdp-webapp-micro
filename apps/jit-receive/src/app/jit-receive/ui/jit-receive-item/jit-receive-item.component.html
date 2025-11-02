@@ -1,0 +1,41 @@
+@if (item(); as item) {
+  <div class="tw-h-full tw-flex tw-flex-col">
+    <div class="tw-my-2">
+      <span class="tw-font-bold tw-text-2xl"
+        >{{ item.vendorBrand }} {{ item.vendorStyle }} - {{ item.vendorDescription }}, {{ item.vendorColor }},
+        <span nz-typography nzType="danger" class="tw-text-3xl">{{ item.vendorSize }}</span></span
+      >
+    </div>
+    <div class="tw-flex-1 tw-flex tw-gap-2">
+      <div class="tw-flex-1 tw-image-fill tw-bg-white">
+        <img [src]="item.previewImage" class="tw-object-top" appPreviewImage appImageErrorUrl />
+      </div>
+      <div class="tw-basis-[250px]">
+        <div class="tw-text-xl">
+          <span class="tw-font-semibold">{{ 'QA.PREQRCODE' | translate | uppercase }}: </span>
+          <span>{{ item.preQrCode }}</span>
+        </div>
+        <div class="tw-text-xl">
+          <span class="tw-font-semibold">MD SKU: </span>
+          <span>{{ item.sku }}</span>
+        </div>
+        <div class="tw-text-xl">
+          <span class="tw-font-semibold">GTIN: </span>
+          <span>{{ item.gtin }}</span>
+        </div>
+        <div class="tw-text-xl">
+          <span class="tw-font-semibold">{{ 'SIZE_CLASS' | translate | uppercase }}: </span>
+          <span>{{ item.sizeClassName }}</span>
+        </div>
+        <div class="tw-text-xl">
+          <span class="tw-font-semibold">COO: </span>
+          <span>{{ item.cooName }}</span>
+        </div>
+        <div class="tw-text-xl">
+          <span class="tw-font-semibold">{{ 'QTY' | translate | uppercase }}: </span>
+          <span>{{ item.groupQtyIdx }} {{ 'OF' | translate }} {{ item.groupQtyTotal }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,8 @@
+button[nz-button] {
+  &.ant-btn .anticon.anticon-minus>svg,
+  &.ant-btn .anticon.anticon-plus>svg {
+    shape-rendering: geometricPrecision;
+  }
+}
+
+

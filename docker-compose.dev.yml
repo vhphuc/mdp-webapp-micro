@@ -1,0 +1,36 @@
+# Docker Compose for testing production-like deployment with Dockerfile.dev
+# Mimics AKS deployment behavior where each app is deployed to a pod
+# and ingress routes paths like /dtf-hat to the service -> pod
+#
+# Usage:
+#   docker compose -f docker-compose.dev.yml up --build
+#   docker compose -f docker-compose.dev.yml down
+#
+# Access: http://localhost:4799/dtf-hat/
+
+services:
+  # dtf-hat service using Dockerfile.dev (builds Angular app and serves with nginx)
+  dtf_hat:
+    build:
+      context: ./apps/dtf-hat
+      dockerfile: Dockerfile.dev
+    # No command override - uses default nginx CMD from Dockerfile
+    # No volume mounts - uses built files from Docker image
+    # Container exposes port 8080 (as per Dockerfile.dev)
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+  # Nginx proxy to mimic production ingress behavior
+  proxy:
+    image: nginx:alpine
+    # Expose local port 4799 -> container port 80 (Nginx)
+    ports:
+      - "80:80"
+    # Inline nginx config for routing /dtf-hat to dtf-hat service
+    volumes:
+      - ./nginx-dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - dtf_hat
+    restart: unless-stopped
+

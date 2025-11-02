@@ -10,7 +10,6 @@ trigger:
 pool: 'NOIS-TaiVo'
 
 variables:
-  - group: MDP PROD
   repository: 'mdp-webapp-dtf-hat'
   dockerfile: 'apps/dtf-hat/Dockerfile'
   k8sPath: 'devops/prod/dtf-hat/k8s'
@@ -19,6 +18,12 @@ variables:
   imageTag: 'prod-$(Build.BuildId)'
 
 steps:
+  - powershell: |
+      $versionFilePath = 'apps/dtf-hat/src/version.txt'
+      $(Build.BuildId) | Out-File -FilePath $versionFilePath -Encoding utf8 -NoNewline
+      Write-Host "Created version.txt with build ID: $(Build.BuildId)"
+    displayName: 'Create version.txt file'
+
   - task: Docker@2
     inputs:
       containerRegistry: 'md-acr-2023'

@@ -1,0 +1,16 @@
+export enum QaStepGroup {
+  Final = 0,
+  OrderDetailUnit = 1,
+  Package = 2,
+  PackagePickInsert = 3,
+  PackagePrintInsert = 4,
+  Coo = 5,
+  TrackingNumber = 6,
+  Size = 7,
+  DtfNeckLabelUnit = 8,
+  StickerGroup = 9,
+  ScanMugTicket = 10,
+  SockTrim = 11,
+  ConfirmPickTicket = 12,
+  ConfirmSockTrim = 13,
+}

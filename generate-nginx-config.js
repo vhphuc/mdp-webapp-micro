@@ -35,71 +35,71 @@ const serviceConfig = {
         location: "/hangtag/",
         websocket: true
     },
-    "qa": {
-        port: 4201,
-        path: "/qa/",
-        upstream: "qa",
-        location: "/qa/",
-        websocket: true
-    },
-    "neck_label": {
-        port: 4202,
-        path: "/neck-label/",
-        upstream: "neck_label",
-        location: "/neck-label/",
-        websocket: true
-    },
-    "shipping": {
-        port: 4203,
-        path: "/shipping/",
-        upstream: "shipping",
-        location: "/shipping/",
-        websocket: true
-    },
     "jit_receive": {
-        port: 4207,
+        port: 4704,
         path: "/jit-receive/",
         upstream: "jit_receive",
         location: "/jit-receive/",
         websocket: true
     },
     "mug_transfer": {
-        port: 4208,
+        port: 4705,
         path: "/mug-transfer/",
         upstream: "mug_transfer",
         location: "/mug-transfer/",
         websocket: true
     },
+    "neck_label": {
+        port: 4706,
+        path: "/neck-label/",
+        upstream: "neck_label",
+        location: "/neck-label/",
+        websocket: true
+    },
     "print_lead": {
-        port: 4209,
+        port: 4707,
         path: "/print-lead/",
         upstream: "print_lead",
         location: "/print-lead/",
         websocket: true
     },
+    "qa": {
+        port: 4708,
+        path: "/qa/",
+        upstream: "qa",
+        location: "/qa/",
+        websocket: true
+    },
     "qa_lead": {
-        port: 4210,
+        port: 4709,
         path: "/qa-lead/",
         upstream: "qa_lead",
         location: "/qa-lead/",
         websocket: true
     },
     "qa_pod": {
-        port: 4211,
+        port: 4710,
         path: "/qa-pod/",
         upstream: "qa_pod",
         location: "/qa-pod/",
         websocket: true
     },
+    "shipping": {
+        port: 4711,
+        path: "/shipping/",
+        upstream: "shipping",
+        location: "/shipping/",
+        websocket: true
+    },
     "trim": {
-        port: 4212,
+        port: 4712,
         path: "/trim/",
         upstream: "trim",
         location: "/trim/",
         websocket: true
     },
     "washing": {
-        port: 4213,
+        port: 4713,
         path: "/washing/",
         upstream: "washing",
         location: "/washing/",

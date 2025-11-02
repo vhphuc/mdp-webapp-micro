@@ -1,0 +1,65 @@
+<div class="tw-grid tw-grid-cols-6 tw-content-center tw-mt-5">
+  <div class="tw-justify-self-start">
+    @if (itemIndex() !== 0) {
+      <div class="tw-p-1 tw-text-3xl tw-cursor-pointer tw-select-none" (click)="previousItem()">&lt;&lt;</div>
+    }
+  </div>
+  <div class="tw-justify-self-center tw-col-start-2 tw-col-end-6 tw-flex tw-flex-col">
+    <span class="tw-font-bold tw-text-2xl">{{ 'MISSING_DAMAGED_ITEM' | translate }}</span>
+    <span class="tw-font-bold tw-text-2xl tw-text-center">{{ itemIndex() + 1 }} {{ 'OF' | translate }} {{ rejectedItemLength() }}</span>
+  </div>
+  <div class="tw-justify-self-end">
+    @if (itemIndex() !== rejectedItemLength() - 1) {
+      <div class="tw-p-1 tw-text-3xl tw-cursor-pointer tw-select-none" (click)="nextItem()">&gt;&gt;</div>
+    }
+  </div>
+</div>
+@if ($currItem(); as item) {
+  <div class="tw-my-2">
+    <span class="tw-font-bold tw-text-xl"
+      >{{ item.vendorBrand }} {{ item.vendorStyle }} - {{ item.vendorDescription }}, {{ item.vendorColor }},
+      <span nz-typography nzType="danger" class="tw-text-2xl">{{ item.vendorSize }}</span></span
+    >
+  </div>
+  <div class="tw-flex tw-gap-2 tw-h-[700px]">
+    <div class="tw-flex-1 tw-image-fill tw-bg-white">
+      <img [src]="item.previewImage" class="tw-object-top" appImageErrorUrl />
+    </div>
+    <div class="tw-basis-[250px]">
+      <div class="tw-text-xl">
+        <span class="tw-font-semibold">{{ 'QA.PREQRCODE' | translate | uppercase }}: </span>
+        <span>{{ item.preQrCode }}</span>
+      </div>
+      <div class="tw-text-xl">
+        <span class="tw-font-semibold">MD SKU: </span>
+        <span>{{ item.sku }}</span>
+      </div>
+      <div class="tw-text-xl">
+        <span class="tw-font-semibold">GTIN: </span>
+        <span>{{ item.gtin }}</span>
+      </div>
+      <div class="tw-text-xl">
+        <span class="tw-font-semibold">{{ 'SIZE_CLASS' | translate | uppercase }}: </span>
+        <span>{{ item.sizeClassName }}</span>
+      </div>
+      <div class="tw-text-xl">
+        <span class="tw-font-semibold">COO: </span>
+        <span>{{ item.cooName }}</span>
+      </div>
+      <div class="tw-text-xl">
+        <span class="tw-font-semibold">{{ 'QTY' | translate | uppercase }}: </span>
+        <span>{{ item.groupQtyRejectIdx }} {{ 'OF' | translate }} {{ item.groupQtyRejectTotal }}</span>
+      </div>
+      <div class="tw-text-xl tw-flex tw-gap-1">
+        <span class="tw-font-semibold">{{ 'ISSUE' | translate }}:</span>
+        <span>
+          @if (item.isMissing) {
+            {{ 'MISSING' | translate }}
+          } @else if (item.isDamaged) {
+            {{ 'DAMAGED' | translate }}
+          }
+        </span>
+      </div>
+    </div>
+  </div>
+}

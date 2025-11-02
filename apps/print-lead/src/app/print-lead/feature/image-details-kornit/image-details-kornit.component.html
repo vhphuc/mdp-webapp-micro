@@ -1,0 +1,259 @@
+<ng-container *ngIf="data">
+  <h2 class="tw-mb-0">{{ 'ORDER.SOURCE_IMAGE' | translate }}</h2>
+
+  <div *ngIf="data.fileExtension === 'pdf'">
+    <div class="tw-flex tw-mb-1 tw-mt-1 tw-gap-1">
+      <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_URL_PDF' | translate }}:</div>
+      <div class="tw-break-all">
+        <a [href]="data.fileUrlPdfPartner" target="_blank" *ngIf="data.fileUrlPdfPartner">{{ data.fileUrlPdfPartner }}</a>
+      </div>
+    </div>
+
+    <div class="tw-flex tw-mb-1 tw-mt-1 tw-gap-1">
+      <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.MD_PRINT_URL_PDF' | translate }}:</div>
+      <div class="tw-break-all">
+        <a [href]="data.fileUrlPdf" target="_blank" *ngIf="data.fileUrlPdf">{{ data.fileUrlPdf }}</a>
+      </div>
+    </div>
+
+    <div class="tw-flex tw-mb-1 tw-mt-1 tw-gap-1">
+      <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.MD_PRINT_URL_PNG' | translate }}:</div>
+      <div class="tw-break-all">
+        <a [href]="data.fileUrl" target="_blank" *ngIf="data.fileUrl">{{ data.fileUrl }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="data.fileExtension !== 'pdf'">
+    <div class="tw-flex tw-mb-1 tw-mt-1 tw-gap-1">
+      <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_URL' | translate }}:</div>
+      <div class="tw-break-all">
+        <a [href]="data.fileUrl" target="_blank" *ngIf="data.fileUrl">{{ data.fileUrl }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-1">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PREVIEW_URL' | translate }}:</div>
+    <div class="tw-break-all">
+      <a [href]="data.previewUrl" target="_blank" *ngIf="data.previewUrl">{{ data.previewUrl }}</a>
+    </div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-2">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_LOCATION' | translate }}:</div>
+    <div>{{ data.locationCode }}</div>
+  </div>
+
+  <div nz-row nzGutter="8" class="tw-mb-2">
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.CENTER_ART_FILE' | translate }}:</div>
+        <div>
+          <ng-container [ngTemplateOutlet]="yesNoTemplate" [ngTemplateOutletContext]="{ $implicit: data.isCenterArtfile }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="7">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.REQUIREDS_ROTATION' | translate }}:</div>
+        <div>
+          <ng-container [ngTemplateOutlet]="yesNoTemplate" [ngTemplateOutletContext]="{ $implicit: data.isRotation }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="5">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.DPI' | translate }}:</div>
+        <div>{{ data.sourceDpiData }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-2">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.NO_DESIGN' | translate }}:</div>
+    <div>
+      <ng-container [ngTemplateOutlet]="yesNoTemplate" [ngTemplateOutletContext]="{ $implicit: data.isNoDesign }"></ng-container>
+    </div>
+  </div>
+
+  <div nz-row nzGutter="8" class="tw-mb-2">
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.CUSTOMER_WIDTH' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.customerWidthMm, inch: data.customerWidthIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.CUSTOMER_HEIGHT' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.customerHeightMm, inch: data.customerHeightIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div nz-row nzGutter="8" class="tw-mb-2">
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.CANVAS_WIDTH' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.canvasWidthMm, inch: data.canvasWidthIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.CANVAS_HEIGHT' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.canvasHeightMm, inch: data.canvasHeightIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div nz-row nzGutter="8" class="tw-mb-2">
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_WIDTH' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{ $implicit: { mm: data.printWidthMm, inch: data.printWidthIn } }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_HEIGHT' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.printHeightMm, inch: data.printHeightIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div nz-row nzGutter="8" class="tw-mb-2">
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.LEFT_TRANSPARENCY' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{ $implicit: { mm: data.leftTransparencyMm, inch: data.leftTransparencyIn } }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.RIGHT_TRANSPARENCY' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.rightTransparencyMm, inch: data.rightTransparencyIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="tw-mt-4 tw-mb-0">
+    {{ 'ORDER.FINAL_PRINT_IMAGE' | translate }} <span *ngIf="data.isUsePolyPro">({{ 'ORDER.POLY_PRO' | translate }})</span>
+  </h2>
+
+  <div class="tw-flex tw-gap-1 tw-mb-1 tw-mt-1" *ngIf="(data.convertedTries ?? 0) > 0">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PROCESSING_ATTEMPTS' | translate }}:</div>
+    <div>{{ data.processingAttempt }}</div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-1 tw-mt-1">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.FILE_NAME' | translate }}:</div>
+    <div>{{ data.fileName }}</div>
+  </div>
+
+  <div nz-row nzGutter="8" class="tw-mb-2">
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_WIDTH' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.finalPrintWidthMm, inch: data.finalPrintWidthIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_HEIGHT' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: { mm: data.finalPrintHeightMm, inch: data.finalPrintHeightIn }
+            }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div nz-row nzGutter="8" class="tw-mb-2">
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.X_OFFSET' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{ $implicit: { mm: data.xOffsetMm, inch: data.xOffsetIn } }"></ng-container>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div class="tw-flex tw-gap-1">
+        <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.Y_OFFSET' | translate }}:</div>
+        <div>
+          <ng-container
+            [ngTemplateOutlet]="mmTemplate"
+            [ngTemplateOutletContext]="{ $implicit: { mm: data.yOffsetMm, inch: data.yOffsetIn } }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #yesNoTemplate let-value>
+    {{ value ? 'YES' : ('NO' | translate) }}
+  </ng-template>
+
+  <ng-template #NATemplate let-value>
+    {{ value ? value : 'N/A' }}
+  </ng-template>
+
+  <ng-template #mmTemplate let-value>
+    {{ (value?.inch ?? 0) + ' In (' + (value?.mm ?? 0) + ' mm)' }}
+  </ng-template>
+</ng-container>

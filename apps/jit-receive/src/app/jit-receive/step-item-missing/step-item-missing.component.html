@@ -1,0 +1,83 @@
+<div class="tw-flex tw-gap-2 tw-h-full">
+  <div class="tw-basis-2/5 tw-min-w-[620px]">
+    @if (store.step() === JitReceiveStep.ITEM_MISSING) {
+      <div class="tw-border-solid">
+        <div class="tw-bg-gray-500 tw-p-2">
+          <span class="tw-text-white tw-text-xl">{{ 'MISSING_ITEM' | translate }}</span>
+        </div>
+        <div class="tw-py-5 tw-text-center tw-text-3xl">
+          <div>
+            <span>{{ 'PRESS' | translate }} </span>
+            <span class="tw-font-semibold">{{ 'ACCEPT' | translate }} </span>
+            <span>{{ 'TO_CONFIRM_YOU' | translate }} </span>
+            <span nz-typography nzType="danger" class="tw-font-semibold">{{ 'COULD_NOT' | translate | uppercase }}</span>
+          </div>
+          <div>
+            <span>{{ 'FIND_THIS_ITEM_IN_THE_PACKAGE' | translate }}</span>
+          </div>
+          <div>
+            <span nz-typography nzType="danger">{{ 'IF_YOU_PROCEED_THE_ITEM_WILL_BE_REORDERED' | translate }}</span>
+          </div>
+        </div>
+        <div class="tw-flex tw-justify-between">
+          <div class="tw-bg-red-500 tw-text-white tw-text-xl tw-px-3 tw-py-2 tw-cursor-pointer" (click)="cancel()">
+            {{ 'CANCEL' | translate }}
+          </div>
+          <div class="tw-bg-yellow-300 tw-text-xl tw-px-3 tw-py-2 tw-cursor-pointer" (click)="acceptMissing()">
+            {{ 'ACCEPT' | translate }}
+          </div>
+        </div>
+      </div>
+    } @else if (store.step() === JitReceiveStep.ITEM_DAMAGED) {
+      <div class="tw-border-solid">
+        <div class="tw-bg-gray-500 tw-p-2">
+          <span class="tw-text-white tw-text-xl">{{ 'DAMAGED_ITEM' | translate }}</span>
+        </div>
+        <div class="tw-py-5 tw-text-center tw-text-3xl">
+          <div>
+            <span>{{ 'PRESS' | translate }} </span>
+            <span class="tw-font-semibold">{{ 'ACCEPT' | translate }} </span>
+            <span>{{ 'TO_CONFIRM_ITEM' | translate }} </span>
+            <span nz-typography nzType="danger" class="tw-font-semibold">{{ 'DAMAGED' | translate | uppercase }}</span>
+          </div>
+          <div>
+            <span>{{ 'FIND_THIS_ITEM_IN_THE_PACKAGE' | translate }}</span>
+          </div>
+          <div>
+            <span nz-typography nzType="danger">{{ 'IF_YOU_PROCEED_THE_ITEM_WILL_BE_REORDERED' | translate }}</span>
+          </div>
+          <div>
+            <span nz-typography nzType="danger">{{ 'RETURN_DAMAGED_ITEM_TO_VENDOR' | translate }}</span>
+          </div>
+        </div>
+        <div class="tw-flex tw-justify-between">
+          <div class="tw-bg-red-500 tw-text-white tw-text-xl tw-px-3 tw-py-2 tw-cursor-pointer" (click)="cancel()">
+            {{ 'CANCEL' | translate }}
+          </div>
+          <div class="tw-bg-yellow-300 tw-text-xl tw-px-3 tw-py-2 tw-cursor-pointer" (click)="acceptMissing()">
+            {{ 'ACCEPT' | translate }}
+          </div>
+        </div>
+      </div>
+    }
+
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <div class="tw-text-xl">
+          <span class="tw-font-semibold">{{ 'MISSING_DAMAGED_QTY' | translate }}: </span>
+          <span>{{ this.store.tracking()!.missingQty + this.store.tracking()!.damagedQty }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tw-flex-1 tw-flex tw-flex-col">
+    @if (store.error(); as err) {
+      <div class="tw-my-3 tw-text-center">
+        <span nz-typography nzType="danger" class="tw-text-2xl tw-font-semibold">{{ err.errorKey | translate: err.paramError }}</span>
+      </div>
+    }
+    <div class="tw-flex-1 tw-mt-16">
+      <app-jit-receive-item [item]="store.packageUnit()!" />
+    </div>
+  </div>
+</div>

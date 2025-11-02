@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: webapp-dtf-hat-container
-          image: monsterdigital.azurecr.io/mdp-webapp-dtf-hat:dev
+          image: monsterdigital.azurecr.io/mdp-webapp-dtf-hat:local-test-6
           imagePullPolicy: Always
           ports:
             - name: http

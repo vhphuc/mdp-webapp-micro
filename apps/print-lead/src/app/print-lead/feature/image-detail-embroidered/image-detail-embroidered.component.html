@@ -1,0 +1,67 @@
+@if (data) {
+  <h2 class="tw-mb-0">{{ 'ORDER.SOURCE_IMAGE' | translate }}</h2>
+
+  <div class="tw-flex tw-gap-1 tw-my-1">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_URL' | translate }}:</div>
+    <div class="tw-break-all">
+      @if (data.fileUrl) {
+        <a [href]="data.fileUrl" target="_blank">{{ data.fileUrl }}</a>
+      }
+    </div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-1">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PREVIEW_URL' | translate }}:</div>
+    <div class="tw-break-all">
+      @if (data.previewUrl) {
+        <a [href]="data.previewUrl" target="_blank">{{ data.previewUrl }}</a>
+      }
+    </div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-1">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'DST_URL' | translate }}:</div>
+    <div class="tw-break-all">
+      @if (data.dstFileUrl) {
+        <a [href]="data.dstFileUrl" target="_blank">{{ data.dstFileUrl }}</a>
+      }
+    </div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-2">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PRINT_LOCATION' | translate }}:</div>
+    <div>{{ data.locationCode }}</div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-2">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.PARTNER_PER_PULSE_ID_THREAD_COLORS' | translate }}:</div>
+    <div class="tw-w-full">
+      @for (threadColor of data.threadColors; track threadColor) {
+        <div>{{ threadColor.code }} - {{ threadColor.brand }}</div>
+      }
+    </div>
+  </div>
+
+  <div class="tw-flex tw-gap-1 tw-mb-2">
+    <div class="tw-font-semibold tw-whitespace-nowrap">{{ 'ORDER.RECIPE' | translate }}:</div>
+    <div>
+      <a (click)="openViewRecipeModal()" *ngIf="data.item">
+        {{ data.item.embroideryJobId}}
+      </a>
+    </div>
+  </div>
+
+  <ng-template #viewRecipeContentRef let-nzData>
+    <p class="tw-whitespace-pre-wrap tw-bg-gray-100 tw-rounded-md tw-p-2 tw-overflow-auto content slim-scrollbar-2">
+      {{nzData | json}}
+    </p>
+  </ng-template>
+
+  <ng-template #viewRecipeFootRef>
+    <div>
+      <button type="button" nz-button nzType="default" (click)="onCloseViewRecipe()">
+        {{ 'CLOSE' | translate }}
+      </button>
+    </div>
+  </ng-template>
+}
